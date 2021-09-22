@@ -56,15 +56,22 @@ def data(wavenumber=True):
     epsilon = 0.000001
     p0 = 10 + epsilon  # add some tiny value to p0 to avoid infinities in integration
 
-    pressure_min, integral_dict, x_full = noniso.tau(p0)
+
+    if "line" in parameters:
+        integral_dict = {}
+        x_full = 0
+        bin_indices = 0
+
+    else:
+        pressure_min, integral_dict, x_full = noniso.tau(p0)
 
 
-    # opacity_grid['cia_h2h2'] = load_files.load_sigma('H2', 'H2', x_full)  # load in CIA cross-sections
-    # opacity_grid['cia_h2he'] = load_files.load_sigma('H2', 'He', x_full)
+        # opacity_grid['cia_h2h2'] = load_files.load_sigma('H2', 'H2', x_full)  # load in CIA cross-sections
+        # opacity_grid['cia_h2he'] = load_files.load_sigma('H2', 'He', x_full)
 
 
-    # Find locations of bins in x_full #
-    bin_indices = find_bin_indices(x_full, bins)
+        # Find locations of bins in x_full #
+        bin_indices = find_bin_indices(x_full, bins)
 
     return x, x_full, integral_dict, bin_indices, ydata, yerr, wavelength_centre, wavelength_err
 
