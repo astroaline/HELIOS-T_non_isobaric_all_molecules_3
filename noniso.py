@@ -98,7 +98,7 @@ def tau(p0):
                 p = p / 1e6  # Need bars to read in opacity file
                 opacity, x_full = load_opacity(t, p, molecule)  # load water opacity for this temperature and pressure
                 # print(x_full)
-                integrand_grid_molecule[j] = opacity * m_water / np.sqrt(np.log(p0 / p))  # compute sigma/sqrt(ln(P0/P))
+                integrand_grid_molecule[j] = opacity * molecular_mass_dict[molecule] / np.sqrt(np.log(p0 / p))  # compute sigma/sqrt(ln(P0/P))
 
             # Integrate for each pressure p, from pmin to p
             for j, p in enumerate(pressure_array_pmin):
